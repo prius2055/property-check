@@ -3,6 +3,9 @@
 class Users::SessionsController < Devise::SessionsController
   include RackSessionsFix
   respond_to :json
+
+
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -29,7 +32,7 @@ class Users::SessionsController < Devise::SessionsController
 
   private
 
-   def respond_with(current_user, _opts = {})
+  def respond_with(current_user, _opts = {})
     render json: {
       status: { 
         code: 200, message: 'Logged in successfully.',
@@ -50,6 +53,7 @@ class Users::SessionsController < Devise::SessionsController
         message: 'Logged out successfully.'
       }, status: :ok
     else
+      
       render json: {
         status: 401,
         message: "Couldn't find an active session."

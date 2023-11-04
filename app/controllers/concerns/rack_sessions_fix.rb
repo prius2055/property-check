@@ -6,6 +6,7 @@ module RackSessionsFix
     end
     def destroy; end
   end
+
   included do
     before_action :set_fake_session
     private
@@ -13,4 +14,5 @@ module RackSessionsFix
       request.env['rack.session'] ||= FakeRackSession.new
     end
   end
+
 end

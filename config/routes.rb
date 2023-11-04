@@ -13,9 +13,19 @@ Rails.application.routes.draw do
     sign_out: 'logout',
     registration: 'signup'
   },
+
+
   controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
   }
+
+  # resources :sessions, only: [:create]
+  # resources :users
+
+  # delete :logout, to: "users/sessions#logout"
+  # get :logged_in, to: "users/sessions#logged_in"
+
+  # root to: "static#home"
 
 end
