@@ -27,5 +27,16 @@ Rails.application.routes.draw do
   # get :logged_in, to: "users/sessions#logged_in"
 
   # root to: "static#home"
+  namespace :api do
+    namespace :v1 do
+      resources :properties do
+        resources :inspections
+      end
+
+      resources :users do
+        resources :inspections
+      end
+    end
+  end
 
 end
