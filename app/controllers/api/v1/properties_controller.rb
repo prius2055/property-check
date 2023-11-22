@@ -13,8 +13,8 @@ class Api::V1::PropertiesController < ApplicationController
   def create
     @property = Property.new(property_params)
 
-    if@property.save
-      render json: { status: 'Success', message: 'Furniture created successfully' }, status: :created
+    if @property.save
+      render json: { status: 'Success', message: 'Property created successfully' }, status: :created
     else
       render json: { errors:@property.errors.full_messages }, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class Api::V1::PropertiesController < ApplicationController
   private
 
   def property_params
-    params.require(:property).permit(:name, :description, :type, :price, :image, :location, :user_id)
+    params.require(:property).permit(:name, :description, :house_type, :price, :image, :location)
   end
 
 end

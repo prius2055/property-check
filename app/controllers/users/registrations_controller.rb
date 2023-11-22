@@ -78,6 +78,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   end
   # end
 
+  def index
+    @users = User.all
+  end
+
   private
 
   def respond_with(current_user, _opts = {})

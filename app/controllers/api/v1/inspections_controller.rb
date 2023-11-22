@@ -1,7 +1,10 @@
 class Api::V1::InspectionsController < ApplicationController
     before_action :authenticate_user!
     def index
-        @inspections = Inspection.includes(:property).where(user_id: params[:user_id])
+        # @inspections = Inspection.includes(:property).where(user_id: params[:user_id])
+        # @inspections = Inspection.includes(:property)
+
+        @inspections = Inspection.all
         render json: @inspections
     end
 
@@ -20,7 +23,7 @@ class Api::V1::InspectionsController < ApplicationController
     if @inspection.save
       render json: { status: 'Success', message: 'Inspection created successfully' }, status: :created
     else
-      render json: { error: 'Unable to create an inspection.' }, status: :unprocessable_entity
+      render json: { errors: @inspection.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -40,7 +43,7 @@ class Api::V1::InspectionsController < ApplicationController
    private
 
   def inspection_params
-    params.require(:appointment).permit(:inspection_date, :inspection_time, :property_id, :city, :user_id)
+    params.require(:inspection).permit(:inspection_date, :inspection_time, :property_id, :user_id)
   end
 
 end

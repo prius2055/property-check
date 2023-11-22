@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
+  
   }
 
   # resources :sessions, only: [:create]
@@ -37,6 +38,10 @@ Rails.application.routes.draw do
       resources :users do
         resources :inspections
       end
+      
+      resources :inspections
+      resources :users, only: [:index]
+   
     end
   end
 
