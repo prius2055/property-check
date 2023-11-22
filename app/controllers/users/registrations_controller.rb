@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Users::RegistrationsController < Devise::RegistrationsController
   include RackSessionsFix
   respond_to :json
@@ -80,6 +78,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   end
   # end
 
+  def index
+    @users = User.all
+  end
+
   private
 
   def respond_with(current_user, _opts = {})
@@ -88,11 +90,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
         status: {code: 200, message: 'Signed up successfully.'},
         data: UserSerializer.new(current_user).serializable_hash[:data][:attributes]
       }
-    else
-      render json: {
+
+      else
+        render json: {
         status: {message: "User couldn't be created successfully. #{current_user.errors.full_messages.to_sentence}"}
       }, status: :unprocessable_entity
     end
   end
-
 end

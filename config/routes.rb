@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/current_user', to: 'current_user#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
+  
   }
 
   # resources :sessions, only: [:create]
@@ -27,5 +29,20 @@ Rails.application.routes.draw do
   # get :logged_in, to: "users/sessions#logged_in"
 
   # root to: "static#home"
+  namespace :api do
+    namespace :v1 do
+      resources :properties do
+        resources :inspections
+      end
+
+      resources :users do
+        resources :inspections
+      end
+      
+      resources :inspections
+      resources :users, only: [:index]
+   
+    end
+  end
 
 end
