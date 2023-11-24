@@ -41,6 +41,8 @@ Rails.application.routes.draw do
       
       resources :inspections
       resources :users, only: [:index]
+
+      get 'user_inspection/:user_id', to: "inspections#user_inspection_index"
    
     end
   end

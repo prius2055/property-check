@@ -8,6 +8,14 @@ class Api::V1::InspectionsController < ApplicationController
         render json: @inspections
     end
 
+    def user_inspection_index
+        @inspections = Inspection.includes(:property).where(user_id: params[:user_id])
+        # @inspections = Inspection.includes(:property)
+
+        # @inspections = Inspection.all
+        render json: @inspections
+    end
+
   def new
     @inspection = Inspection.new
   end
