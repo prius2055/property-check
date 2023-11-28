@@ -1,18 +1,18 @@
 databases:
-  - name: mysite
-    databaseName: mysite
-    user: mysite
+  - name: property-check
+    databaseName: property_check_production
+    user: property_check_production_user
 
 services:
   - type: web
-    name: mysite
+    name: propertyCheck
     runtime: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysite
+          name: property_check_production
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
