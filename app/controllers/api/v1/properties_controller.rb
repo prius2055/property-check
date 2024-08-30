@@ -1,5 +1,5 @@
 class Api::V1::PropertiesController < ApplicationController
-    before_action :authenticate_user!, except: [:index]
+    before_action :authenticate_user!
     def index
         @properties = Property.all
         render json: @properties
